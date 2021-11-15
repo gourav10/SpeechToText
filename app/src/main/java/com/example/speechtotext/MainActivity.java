@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -20,12 +21,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     ImageButton imgButton;
     EditText editText;
     public static final int AUDIOMETRIC = 1;
     SpeechRecognizer speechRecognizer;
+
     int count =0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +106,15 @@ public class MainActivity extends AppCompatActivity {
             public void onResults(Bundle results) {
                 //When speech recognition is stopped
                 ArrayList<String> data = results.getStringArrayList(speechRecognizer.RESULTS_RECOGNITION);
-                editText.setText(data.get(0));
+                String validString = "";
+                for (String action: Constants.ACCEPTABLE_ACTIONS) {
+                    if(data.get(0).contains(action)){
+                        validString = data.get(0);
+                        break;
+                    }
+                }
+                editText.setText(validString);
+
             }
 
             @Override
