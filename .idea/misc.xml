@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Prog/Android_Projects/SpeechToText/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Prog/Android_Projects/SpeechToText/app/src/main/res/layout/activity_main_row_item.xml" value="0.43157894736842106" />
+        <entry key="..\:/Prog/Android_Projects/SpeechToText/app/src/main/res/layout/row_item.xml" value="0.4" />
       </map>
     </option>
   </component>
