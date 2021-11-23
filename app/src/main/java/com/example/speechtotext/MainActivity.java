@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.content.Intent;
@@ -26,10 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     ImageButton imgButton;
     EditText editText;
+    RecyclerView listView;
     public static final int AUDIOMETRIC = 1;
     SpeechRecognizer speechRecognizer;
-
+    String s1[],s2[];
     int count =0;
+    int imgList[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +41,21 @@ public class MainActivity extends AppCompatActivity {
 
         imgButton = findViewById(R.id.activityMain_BtnMic);
         editText = findViewById(R.id.actvityMain_EdText);
+        listView = findViewById(R.id.activityMain_listView);
+        s1 = getResources().getStringArray(R.array.programming_languages);
+        s2 = getResources().getStringArray(R.array.programming_description);
+
 
         //Check if App has permission to record
         if(isMicrophonePresent()){
             getMicPermission();
         }
-//        if(ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED){
-//            Ask for user permission.
-//            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.RECORD_AUDIO}, AUDIOMETRIC);
-//
-//        }
 
+        MainListAdapter dummyAdapter = new MainListAdapter(this,s1,s2,imgList);
+        listView.setAdapter(dummyAdapter);
+        listView.setLayoutManager(new LinearLayoutManager(this));
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+
 
         final Intent speechRecognitionIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 

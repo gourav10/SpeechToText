@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">SpeechToText</string>
+    <string-array name="programming_languages">
+        <item>C</item>
+        <item>C++</item>
+        <item>Java</item>
+        <item>Python</item>
+        <item>C#</item>
+        <item>Kotlin</item>
+        <item>Javascript</item>
+    </string-array>
+    <string-array name="programming_description">
+        <item>This is random description</item>
+        <item>This is random description</item>
+        <item>This is random description</item>
+        <item>This is random description</item>
+        <item>This is random description</item>
+        <item>This is random description</item>
+        <item>This is random description</item>
+    </string-array>
 </resources>
