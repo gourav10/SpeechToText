@@ -21,7 +21,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     String s1[],s2[];
     int count =0;
     int imgList[];
+    ArrayList<VoiceData> voiceDataList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setLayoutManager(new LinearLayoutManager(this));
         speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 
+        voiceDataList = new ArrayList<>();
 
         final Intent speechRecognitionIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
 
@@ -117,11 +121,17 @@ public class MainActivity extends AppCompatActivity {
                 for (String action: Constants.ACCEPTABLE_ACTIONS) {
                     if(data.get(0).contains(action)){
                         validString = data.get(0);
+                        VoiceData vData = new VoiceData();
+                        vData.setLabel(action);
+                        vData.setTimestamp(new Timestamp(new Date().getTime()));
+                        vData.setSentence(validString);
+                        voiceDataList.add(vData);
                         break;
                     }
                 }
+                
+                dummyAdapter.notifyItemInserted(dummyAdapter.getItemCount());
                 editText.setText(validString);
-
             }
 
             @Override
